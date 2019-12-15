@@ -17,27 +17,37 @@ import api from './api';
 
 const getAllBookmarks = function() {
 
-}
+};
 
 
 
 const getBookmarkElement = function (bookmark) {
+  // if(bookmark.expanded === true) {
   return `
-      <li class='new-bookmark'>
-        <span id="title">${bookmark.title}</span>
-        <span id="rating">${bookmark.rating}</span>
-      </li>
-
-      `;
+    <ul class="child">
+       <li class='new-bookmark-expanded' data-item-id="${bookmark.id}">
+       <span id="title">${bookmark.title}</span>
+       <span id="rating">${bookmark.rating}</span>
+       </li>
+       <span class="description">${bookmark.description}</span>
+       <a href="${bookmark.url}" class="url-link" title="Go to this book here" target="_blank">Visit Site</a>
+       <button class="btn"><i class="fa fa-trash" id="trash"></i></button>
+     </ul>
+       `;
+  // }
+  // } else {
+  //   `
+  //   <ul class="child">
+  //      <li class='new-bookmark-expanded' data-item-id="${bookmark.id}">
+  //      <span id="title">${bookmark.title}</span>
+  //      <span id="rating">${bookmark.rating} </span>
+  //      </li>
+  //   </ul>
+  //   `;
+  // }
 };
 
 
-$('.child').hide();
-$('.new-bookmark').click(function() {
-  $(this).siblings('.new-bookmark').find('ul').slideUp();
-  $(this).find('ul').slideToggle();
-});
-    
 
 const getBookmarkString = function (bookmarkList) {
   const bookmarks = bookmarkList.map((element) => getBookmarkElement(element));
@@ -116,6 +126,7 @@ const handleDeleteBookmarkClicked = function() {
       });
   });
 };
+
 
 //This is an event listener binding function, 
 //making them accessible on the DOM

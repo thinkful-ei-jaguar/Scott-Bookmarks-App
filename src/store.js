@@ -6,18 +6,18 @@ const store = {
   bookmarks: [
     {
       id: 'bi420',
-      title: 'Test Title 1',
+      title: 'Google',
       rating: 2,
-      url: 'http://www.yahoo.com',
-      description: 'A LOCAL test object that links to Yahoo',
+      url: 'http://www.google.com',
+      description: 'this is google',
       expanded: true
     },
     {
       id: 'bi420',
-      title: 'Definitely not Yahoo',
+      title: 'yellow',
       rating: 5,
-      url: 'http://www.yahoo.com',
-      description: 'A LOCAL test object that links to Yahoo',
+      url: 'http://www.yellow.com',
+      description: 'yellow',
       expanded: true
     }
   ],
@@ -27,7 +27,7 @@ const store = {
 };
 
 
-//findById will find a book myt the specific id 
+//findById will find a book by the specific id 
 
 const findById = function(id) {
   return this.bookmarks.find(currentBookmark => currentBookmark.id === id);
