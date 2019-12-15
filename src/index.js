@@ -15,31 +15,12 @@ import './index.css';
 import api from './api';
 import store from './store';
 import bookmark from './bookmark-list';
-
-
-// function renderBookmarkList(listItems) {
-
-//   const html = `
-//         <li>
-//         <span class="title">Bookmark 1</span>
-//         <button class="visit">visit</button>
-//         <span class="fa fa-trash" />
-//         </li>
-//     `;
-  
-//   $('.bookmark-list').html(listItems); 
-// }
-
-// function makeListItems() {
-
-// }
-
 function renderHomePage() {
   const html = `
         <button class="add-bookmark">
         Add Bookmark
        </button>
-         <select name="ratings" id="filter-button">
+           <select name="ratings" id="filter-button">
              <option value="">Filter By Rating</option>
              <option value="five-star">5 Stars</option>
              <option value="four-star">4 Stars</option>
@@ -71,12 +52,12 @@ function addFormTemplate() {
               <input type="text" name="description" id="description" required>
             </div>
           <div class='form-center'>
-            <select name="rating-filter" id="js-rating-input" required>
-              <option value="1">5 stars</option>
-              <option value="2">4 stars</option>
+            <select name="rating-filter" id="rating-dropdown" required>
+              <option value="1">1 star</option>
+              <option value="2">2 stars</option>
               <option value="3">3 stars</option>
-              <option value="4">2 stars</option>
-              <option value="5">1 star</option>
+              <option value="4">5 stars</option>
+              <option value="5">5 stars</option>
             </select>
             <div id="form-buttons">
               <button type="submit">Submit</button>
@@ -99,25 +80,6 @@ const handleCancelButtonOnAddForm = function() {
   });
 };
 
-function serializeJson(form) {
-  const formData = new FormData(form);
-  const o = {};
-  formData.forEach((val, name) => o[name] = val);
-  return JSON.stringify(o);
-}
-  
-$('#add-new-bookmark').submit(event => {
-  event.preventDefault();
-  // These two lines are THE SAME
-  // let formElement = document.querySelector("#contactForm");
-  let formElement = $('#add-new-bookmark')[0];
-  // the [0] here selects the native element
-  console.log( serializeJson(formElement) );
-  
-  $('#add-new-bookmark').html(`
-      <p>Your form submission has been received!</p>
-    `);
-});
   
 
 
@@ -132,13 +94,28 @@ function bookmarkHandler() {
 $(bookmarkHandler);
 
 const main = function() {
+
+    
   api.getBookmarks()
     .then(res => res.json())
-    .then(res => console.log(res));
+    .then((bookmarks) => {
+      bookmarks.forEach((bookmark) => store.addBookmark(bookmark));
+      bookmark.render();
+    });
 
+  //   api.getBookmarks()
+  //     .then((items) => {
+  //       items.forEach((item) => store.addBookmark(item));
+  //       bookmark.render();
+  //     });
   bookmark.bindEventListeners();
   bookmark.render();
 };
 
 $(main);
 
+export default {
+  addFormTemplate,
+
+
+};

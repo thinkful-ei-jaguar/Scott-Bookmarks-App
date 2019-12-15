@@ -2,29 +2,29 @@
 //and functions that manipulate it(for example, 
 //if you wanted to have search or filter on your bookmarks list)
 
-// const store = {
-//   bookmarks: [
-//     {
-//       id: 'bi420',
-//       title: 'Test Title 1',
-//       rating: 2,
-//       url: 'http://www.yahoo.com',
-//       description: 'A LOCAL test object that links to Yahoo',
-//       expanded: true
-//     },
-//     {
-//       id: 'bi420',
-//       title: 'Definitely not Yahoo',
-//       rating: 5,
-//       url: 'http://www.yahoo.com',
-//       description: 'A LOCAL test object that links to Yahoo',
-//       expanded: true
-//     }
-//   ],
-//   adding: true,
-//   error: null,
-//   filter: 0
-// };
+const store = {
+  bookmarks: [
+    {
+      id: 'bi420',
+      title: 'Test Title 1',
+      rating: 2,
+      url: 'http://www.yahoo.com',
+      description: 'A LOCAL test object that links to Yahoo',
+      expanded: true
+    },
+    {
+      id: 'bi420',
+      title: 'Definitely not Yahoo',
+      rating: 5,
+      url: 'http://www.yahoo.com',
+      description: 'A LOCAL test object that links to Yahoo',
+      expanded: true
+    }
+  ],
+  adding: true,
+  error: null,
+  filter: 0
+};
 
 
 //findById will find a book myt the specific id 
@@ -36,7 +36,7 @@ const findById = function(id) {
 //addBookmark will add the bookmark to the store(bookmarks)
 
 const addBookmark = function (bookmark) {
-  this.bookmarks.push(bookmark);
+  this.store.bookmarks.push(bookmark);
 };
 
 //findAndDelete will delete a bookmark from the local store
@@ -47,7 +47,10 @@ const findAndDelete = function(id) {
 
 //findAndUpdate will change a bookmark currently in the local store
 
-const findAndUpdate = function (id, newData) {};
+const findAndUpdate = function (id, newData) {
+  const currentBookmark = this.findById(id);
+  Object.assign(currentBookmark, newData);
+};
 
 
 const filterBookmarkList = function() {
@@ -64,9 +67,7 @@ const setError = function (error) {
 
 
 export default {
-//   bookmarks,
-//   error,
-//   filter,
+  store,
   findById,
   addBookmark,
   findAndDelete,
