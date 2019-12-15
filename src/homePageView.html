@@ -1,0 +1,51 @@
+const store = {
+  bookmarks: [],
+  adding: false,
+  error: null,
+  filter: 0
+};
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+  <title>Document</title>
+</head>
+<body>
+    <button>
+     Add Bookmark
+    </button>
+      <select name="ratings" id="filter-button">
+          <option value="">Filter By Rating</option>
+          <option value="five-star">5 Stars</option>
+          <option value="four-star">4 Stars or more</option>
+          <option value="three-star">3 Stars or more</option>
+          <option value="two-star">2 Stars or more</option>
+          <option value="one-star">1 Star or more</option>
+        </select>
+      <ul>
+        <li>
+          <span id="title">SAMPLE BOOKMARK</span>
+          <div id="stars">
+            <form action="">
+              <input class="star star-5" id="star-5" type="radio" name="star" />
+              <label class="star star-5" for="star-5"></label>
+              <input class="star star-4" id="star-4" type="radio" name="star" />
+              <label class="star star-4" for="star-4"></label>
+              <input class="star star-3" id="star-3" type="radio" name="star" />
+              <label class="star star-3" for="star-3"></label>
+              <input class="star star-2" id="star-2" type="radio" name="star" />
+              <label class="star star-2" for="star-2"></label>
+              <input class="star star-1" id="star-1" type="radio" name="star" />
+              <label class="star star-1" for="star-1"></label>
+            </form>
+          </div>
+        </li>
+  
+      </ul>
+    </body>
+  
+  </html>
+  

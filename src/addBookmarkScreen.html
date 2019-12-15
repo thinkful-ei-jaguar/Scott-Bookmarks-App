@@ -1,0 +1,48 @@
+const store = {
+  bookmarks: [],
+  adding: true,
+  error: null,
+  filter: 0
+};
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <section id='js-add-new-bookmark' class='hidden' role="region">
+    <form>
+      <h2 class='form-title'>What would you like to bookmark?</h2>
+      <section class='form-right' role="region">
+        <div class='user-input'>
+          <label for="title">Title: </label>
+          <input type="text" name="title" id="js-title-input" required>
+        </div>
+        <div class='user-input'>
+          <label for="url">URL: </label>
+          <input type="url" name="url" id="js-url-input" placeholder="http://example.com" value="http://" required>
+        </div>
+        <div class='user-input'>
+          <label for="description">Description: </label>
+          <input type="text" name="description" id="js-description-input" required>
+        </div>
+      </section>
+      <div class='form-center'>
+        
+        <div id="form-buttons">
+          <button type="submit">Submit</button>
+          <button type="button" id="js-add-cancel">Cancel</button>
+        </div>
+      </div>
+    </form>
+  </section>
+</body>
+
+</html>
