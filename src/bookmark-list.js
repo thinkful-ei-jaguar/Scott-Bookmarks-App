@@ -12,24 +12,23 @@ import api from './api';
 
 
 
-const getBookmarkElement = function () {
-    return `
+//Should use the api.getAllBookmarks to retrieve the data from the server, 
+//empty the store.bookmarks, fill store.bookmarks with the data from the server.
+
+const getAllBookmarks = function() {
+
+}
+
+
+
+const getBookmarkElement = function (bookmark) {
+  return `
       <li class='new-bookmark'>
-        <span id="title">${store.store.bookmarks.title}</span>
-        <span id="rating">${store.store.bookmarks.rating}</span>
+        <span id="title">${bookmark.title}</span>
+        <span id="rating">${bookmark.rating}</span>
       </li>
-      <ul class="child">
-        <li class='new-bookmark-expanded' data-item-id="${store.store.bookmarks.id}">
-        <span id="title">${store.store.bookmarks.title}</span>
-        <span id="rating">${store.store.bookmarks.rating}</span>
-        </li>
-        <span class="description">${store.store.bookmarks.description}</span>
-        <a href="${store.store.bookmarks.url}" class="url-link" title="Go to this book here" target="_blank">Visit Site</a>
-        <button class="btn"><i class="fa fa-trash" id="trash"></i></button>
-      </ul>
- 
+
       `;
-  }
 };
 
 
@@ -106,7 +105,7 @@ const getItemIdFromElement = function (item) {
 };
 
 const handleDeleteBookmarkClicked = function() {
-  $('.child').on('click', '#trash', event => {
+  $('.child').on('click', '.btn', event => {
     const id = getItemIdFromElement(event.currentTarget);
 
     api.deleteBookmark(id)
@@ -122,7 +121,6 @@ const handleDeleteBookmarkClicked = function() {
 //making them accessible on the DOM
 
 const bindEventListeners = function () {
-  getBookmarkElement();
   handleSubmitButtonOnAddForm();
   handleEditBookmarkSubmit();
   handleDeleteBookmarkClicked();

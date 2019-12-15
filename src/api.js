@@ -12,16 +12,16 @@ function getBookmarks() {
 }
 
 const createBookmark = function(body) {
-    // const newBookmark = JSON.stringify({title, url, description, rating });
+  // const newBookmark = JSON.stringify({title, url, description, rating });
     
-    return fetch(BASE_URL, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: body
-    });
-  };
+  return fetch(BASE_URL, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: body
+  });
+};
 
 
 
