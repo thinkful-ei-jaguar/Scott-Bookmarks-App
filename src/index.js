@@ -1,119 +1,144 @@
+//index.js is for interacting with the html. click handlers go here. 
+//render functions go here also. 
+//the functions in index.js should basically just be 
+//calling functions from bookmarks.js. 
+//for example, in index.js have a 
+//function renderBookmarksList() -> this would call getBookMarkListString 
+//from bookmarks.js to get the a string of all the current bookmarks, 
+//and attach it to the <ul> element via jquery. 
+//basically, all your jquery will be in index.js
+
+
 import $ from 'jquery';
 
 import './index.css';
-import bookmark from './bookmark'
+import api from './api';
+import store from './store';
+import bookmark from './bookmark-list';
 
+
+// function renderBookmarkList(listItems) {
+
+//   const html = `
+//         <li>
+//         <span class="title">Bookmark 1</span>
+//         <button class="visit">visit</button>
+//         <span class="fa fa-trash" />
+//         </li>
+//     `;
+  
+//   $('.bookmark-list').html(listItems); 
+// }
+
+// function makeListItems() {
+
+// }
 
 function renderHomePage() {
   const html = `
-    <button class="add-bookmark">
-    Add Bookmark
-   </button>
-     <select name="ratings" id="filter-button">
-         <option value="">Filter By Rating</option>
-         <option value="five-star">5 Stars</option>
-         <option value="four-star">4 Stars</option>
-         <option value="three-star">3 Stars</option>
-         <option value="two-star">2 Stars</option>
-         <option value="one-star">1 Star</option>
-       </select>
-     <ul>
-       <li>
-         <span id="title">SAMPLE BOOKMARK</span>
-         <div id="stars">
-           <form action="">
-             <input class="star star-5" id="star-5" type="radio" name="star" />
-             <label class="star star-5" for="star-5"></label>
-             <input class="star star-4" id="star-4" type="radio" name="star" />
-             <label class="star star-4" for="star-4"></label>
-             <input class="star star-3" id="star-3" type="radio" name="star" />
-             <label class="star star-3" for="star-3"></label>
-             <input class="star star-2" id="star-2" type="radio" name="star" />
-             <label class="star star-2" for="star-2"></label>
-             <input class="star star-1" id="star-1" type="radio" name="star" />
-             <label class="star star-1" for="star-1"></label>
-           </form>
-         </div>
-       </li>
-  
-     </ul>
-   </body>
-      `;
-  
+        <button class="add-bookmark">
+        Add Bookmark
+       </button>
+         <select name="ratings" id="filter-button">
+             <option value="">Filter By Rating</option>
+             <option value="five-star">5 Stars</option>
+             <option value="four-star">4 Stars</option>
+             <option value="three-star">3 Stars</option>
+             <option value="two-star">2 Stars</option>
+             <option value="one-star">1 Star</option>
+           </select>
+       </body>
+          `;
+      
   $('.main').html(html); //accessing the main from index.html and inputing the html variable we just created
 }
-
+    
 function addFormTemplate() {
-  const html = `
-    <section id='js-add-new-bookmark' class='hidden' role="region">
-    <form>
-      <h2 class='form-title'>What would you like to bookmark?</h2>
-      <section class='form-right' role="region">
-        <div class='user-input'>
-          <label for="title">Title: </label>
-          <input type="text" name="title" id="js-title-input" required>
-        </div>
-        <div class='user-input'>
-          <label for="url">URL: </label>
-          <input type="url" name="url" id="js-url-input" placeholder="http://example.com" value="http://" required>
-        </div>
-        <div class='user-input'>
-          <label for="description">Description: </label>
-          <input type="text" name="description" id="js-description-input" required>
-        </div>
-      </section>
-      <div class='form-center'>
-        <select name="rating-filter" id="js-rating-input" required>
-          <option value="1">⭐</option>
-          <option value="2">⭐⭐</option>
-          <option value="3">⭐⭐⭐</option>
-          <option value="4">⭐⭐⭐⭐</option>
-          <option value="5">⭐⭐⭐⭐⭐</option>
-        </select>
-        <div id="form-buttons">
-          <button type="submit">Submit</button>
-          <button type="button" id="js-add-cancel">Cancel</button>
-        </div>
-      </div>
-    </form>
-    `;
-  $('.main').append(html);
+  return `
+        <form id='add-new-bookmark'>
+          <h2 class='form-title'>What would you like to bookmark?</h2>
+          <section class='form-right' role="region">
+            <div class='user-input'>
+              <label for="bookmark-title">Title: </label>
+              <input type="text" name="title" id="bookmark-title" required>
+            </div>
+            <div class='user-input'>
+              <label for="url">URL: </label>
+              <input type="url" name="url" id="url" placeholder="http://example.com" value="https://" required>
+            </div>
+            <div class='user-input'>
+              <label for="description">Description: </label>
+              <input type="text" name="description" id="description" required>
+            </div>
+          <div class='form-center'>
+            <select name="rating-filter" id="js-rating-input" required>
+              <option value="1">5 stars</option>
+              <option value="2">4 stars</option>
+              <option value="3">3 stars</option>
+              <option value="4">2 stars</option>
+              <option value="5">1 star</option>
+            </select>
+            <div id="form-buttons">
+              <button type="submit">Submit</button>
+              <button type="button" id="js-add-cancel">Cancel</button>
+            </div>
+          </div>
+        </form>
+        `;
 }
-
+    
 const handleAddFormClicked = function() {
   $('.main').on('click', '.add-bookmark', function() {
-    event.preventDefault();
-    addFormTemplate();
+    $('.main').prepend(addFormTemplate());
   });
 };
-  
+      
+const handleCancelButtonOnAddForm = function() {
+  $('.main').on('click', '#js-add-cancel', function() {
+    renderHomePage();
+  });
+};
 
-
-
-function renderBookmarkList(listItems) {
-
-  const html = `
-        <li>
-        <span class="title">Bookmark 1</span>
-        <button class="visit">visit</button>
-        <span class="fa fa-trash" />
-        </li>
-    `;
-  
-  $('.bookmark-list').html(listItems); 
+function serializeJson(form) {
+  const formData = new FormData(form);
+  const o = {};
+  formData.forEach((val, name) => o[name] = val);
+  return JSON.stringify(o);
 }
-
-function makeListItems() {
-
-}
-
   
+$('#add-new-bookmark').submit(event => {
+  event.preventDefault();
+  // These two lines are THE SAME
+  // let formElement = document.querySelector("#contactForm");
+  let formElement = $('#add-new-bookmark')[0];
+  // the [0] here selects the native element
+  console.log( serializeJson(formElement) );
+  
+  $('#add-new-bookmark').html(`
+      <p>Your form submission has been received!</p>
+    `);
+});
+  
+
+
 function bookmarkHandler() {
   renderHomePage();
   addFormTemplate();
-  renderBookmarkList();
+  //   renderBookmarkList();
   handleAddFormClicked();
+  handleCancelButtonOnAddForm();
 }
   
 $(bookmarkHandler);
-  
+
+const main = function() {
+  api.getBookmarks()
+    .then(res => res.json())
+    .then(res => console.log(res));
+
+  bookmark.bindEventListeners();
+  bookmark.render();
+};
+
+$(main);
+

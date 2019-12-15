@@ -12,7 +12,7 @@ ul {
   width: 80%;
   margin: 0 auto;
   /* to center element */
-  padding: 2em;
+  padding: 15px;
 }
 
 ul li {
@@ -25,6 +25,22 @@ ul li {
 
 li .expanded {
   height: 350px;
+}
+
+.add-bookmark-form {
+  border: solid 2px grey;
+  width: 40%;
+  margin: 0 auto;
+  border-radius: 5px;
+  padding-bottom: 25px;
+}
+
+.add-bookmark {
+  margin-top: 30px;
+}
+
+#js-rating-input {
+  margin: 10px;
 }
 
 body {
