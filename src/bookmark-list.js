@@ -24,27 +24,25 @@ const getAllBookmarks = function() {
 const getBookmarkElement = function (bookmark) {
   // if(bookmark.expanded === true) {
   return `
-    <ul class="child">
        <li class='new-bookmark-expanded' data-item-id="${bookmark.id}">
-       <span id="title">${bookmark.title}</span>
-       <span id="rating">${bookmark.rating}</span>
+          <span id="title">${bookmark.title}</span>
+          <span id="rating">${bookmark.rating}</span>
+          <div class="expanded-content">
+            <span class="description">${bookmark.description}</span>
+            <a href="${bookmark.url}" class="url-link" title="Go to this book here" target="_blank">Visit Site</a>
+            <button class="btn"><i class="fa fa-trash" id="trash"></i></button>
+          </div>
        </li>
-       <span class="description">${bookmark.description}</span>
-       <a href="${bookmark.url}" class="url-link" title="Go to this book here" target="_blank">Visit Site</a>
-       <button class="btn"><i class="fa fa-trash" id="trash"></i></button>
-     </ul>
-       `;
-  // }
-  // } else {
-  //   `
-  //   <ul class="child">
-  //      <li class='new-bookmark-expanded' data-item-id="${bookmark.id}">
-  //      <span id="title">${bookmark.title}</span>
-  //      <span id="rating">${bookmark.rating} </span>
-  //      </li>
-  //   </ul>
-  //   `;
-  // }
+`;
+};
+
+
+
+const handleBookmarkElementClickForExpansion = function() {
+  $('.main').on('click', '.new-bookmark-expanded', function (event) {
+    event.preventDefault();
+    return $('.new-bookmark-expanded').addClass('show-details');
+  });
 };
 
 
@@ -135,6 +133,7 @@ const bindEventListeners = function () {
   handleSubmitButtonOnAddForm();
   handleEditBookmarkSubmit();
   handleDeleteBookmarkClicked();
+  handleBookmarkElementClickForExpansion();
 };
 
 

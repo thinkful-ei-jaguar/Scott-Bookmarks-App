@@ -97,10 +97,10 @@ const main = function() {
 
     
   api.getBookmarks()
+  console.log(res.json())
     .then(res => res.json())
     .then((bookmarks) => {
       bookmarks.forEach((bookmark) => store.addBookmark(bookmark));
-      bookmark.render();
     });
   bookmark.bindEventListeners();
   bookmark.render();

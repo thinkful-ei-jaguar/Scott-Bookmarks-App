@@ -39,6 +39,14 @@ li .expanded {
   margin-top: 30px;
 }
 
+.expanded-content {
+  display: none;
+}
+
+.show-details .expanded-content {
+  display: block
+ }
+
 #js-rating-input {
   margin: 10px;
 }

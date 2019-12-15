@@ -6,18 +6,18 @@ const store = {
   bookmarks: [
     {
       id: 'bi420',
-      title: 'Google',
+      title: 'Sample Bookmark 1',
       rating: 2,
       url: 'http://www.google.com',
-      description: 'this is google',
+      description: 'this links to google',
       expanded: true
     },
     {
       id: 'bi420',
-      title: 'yellow',
+      title: 'Sample Bookmark 2',
       rating: 5,
-      url: 'http://www.yellow.com',
-      description: 'yellow',
+      url: 'http://www.google.com',
+      description: 'this also links to google',
       expanded: true
     }
   ],
