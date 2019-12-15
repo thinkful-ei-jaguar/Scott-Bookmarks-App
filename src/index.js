@@ -22,18 +22,19 @@ function renderHomePage() {
        </button>
            <select name="ratings" id="filter-button">
              <option value="">Filter By Rating</option>
-             <option value="five-star">5 Stars</option>
-             <option value="four-star">4 Stars</option>
-             <option value="three-star">3 Stars</option>
-             <option value="two-star">2 Stars</option>
-             <option value="one-star">1 Star</option>
+             <option value="5" >5 Stars</option>
+             <option value="4">4 Stars</option>
+             <option value="3">3 Stars</option>
+             <option value="2">2 Stars</option>
+             <option value="1">1 Star</option>
            </select>
        </body>
           `;
       
   $('.main').html(html); //accessing the main from index.html and inputing the html variable we just created
 }
-    
+
+
 function addFormTemplate() {
   return `
         <form id='add-new-bookmark'>
@@ -97,13 +98,12 @@ const main = function() {
 
     
   api.getBookmarks()
-  console.log(res.json())
     .then(res => res.json())
     .then((bookmarks) => {
       bookmarks.forEach((bookmark) => store.addBookmark(bookmark));
+      bookmark.render();
     });
   bookmark.bindEventListeners();
-  bookmark.render();
 };
 
 $(main);

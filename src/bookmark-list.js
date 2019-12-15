@@ -20,14 +20,20 @@ const getAllBookmarks = function() {
 };
 
 
+const handleBookmarkElementClickForExpansion = function() {
+  $('main').on('click', '#add-new-bookmark', function (event) {
+    event.preventDefault();
+  $('#additionalBookmarkContent').removeClass('.expandedContent');
+  });
+};
 
 const getBookmarkElement = function (bookmark) {
   // if(bookmark.expanded === true) {
   return `
-       <li class='new-bookmark-expanded' data-item-id="${bookmark.id}">
+       <li onclick="handleBookmarkElementClickForExpansion()" class='fullBookmark' data-item-id="${bookmark.id}">
           <span id="title">${bookmark.title}</span>
           <span id="rating">${bookmark.rating}</span>
-          <div class="expanded-content">
+          <div id="additionalBookmarkContent" class='expandedContent'>
             <span class="description">${bookmark.description}</span>
             <a href="${bookmark.url}" class="url-link" title="Go to this book here" target="_blank">Visit Site</a>
             <button class="btn"><i class="fa fa-trash" id="trash"></i></button>
@@ -38,12 +44,8 @@ const getBookmarkElement = function (bookmark) {
 
 
 
-const handleBookmarkElementClickForExpansion = function() {
-  $('.main').on('click', '.new-bookmark-expanded', function (event) {
-    event.preventDefault();
-    return $('.new-bookmark-expanded').addClass('show-details');
-  });
-};
+
+
 
 
 
