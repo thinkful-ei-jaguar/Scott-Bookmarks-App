@@ -21,16 +21,14 @@ const getAllBookmarks = function() {
 
 
 const handleBookmarkElementClickForExpansion = function() {
-  $('main').on('click', '#add-new-bookmark', function (event) {
-    event.preventDefault();
-  $('#additionalBookmarkContent').removeClass('.expandedContent');
+  $('main').on('click', '.fullBookmark', function () {
+    $('#additionalBookmarkContent').removeClass('.expandedContent');
   });
 };
 
 const getBookmarkElement = function (bookmark) {
-  // if(bookmark.expanded === true) {
   return `
-       <li onclick="handleBookmarkElementClickForExpansion()" class='fullBookmark' data-item-id="${bookmark.id}">
+       <li class='fullBookmark' data-item-id="${bookmark.id}">
           <span id="title">${bookmark.title}</span>
           <span id="rating">${bookmark.rating}</span>
           <div id="additionalBookmarkContent" class='expandedContent'>
