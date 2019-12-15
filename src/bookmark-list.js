@@ -21,7 +21,8 @@ const getAllBookmarks = function() {
 
 
 const handleBookmarkElementClickForExpansion = function() {
-  $('main').on('click', '.fullBookmark', function () {
+  $('#bookmark-list').on('click', '.fullBookmark', function () {
+    console.log('hello');
     $('#additionalBookmarkContent').removeClass('.expandedContent');
   });
 };
