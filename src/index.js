@@ -52,7 +52,7 @@ function addFormTemplate() {
               <input type="text" name="description" id="description" required>
             </div>
           <div class='form-center'>
-            <select name="rating-filter" id="rating-dropdown" required>
+            <select name="rating" id="rating-dropdown" required>
               <option value="1">1 star</option>
               <option value="2">2 stars</option>
               <option value="3">3 stars</option>
@@ -102,12 +102,6 @@ const main = function() {
       bookmarks.forEach((bookmark) => store.addBookmark(bookmark));
       bookmark.render();
     });
-
-  //   api.getBookmarks()
-  //     .then((items) => {
-  //       items.forEach((item) => store.addBookmark(item));
-  //       bookmark.render();
-  //     });
   bookmark.bindEventListeners();
   bookmark.render();
 };

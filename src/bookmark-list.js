@@ -8,29 +8,37 @@ import $ from 'jquery';
 
 import store from './store';
 import api from './api';
+// import cuid from 'cuid';
+
 
 
 const getBookmarkElement = function () {
   if(store.store.expanded === true) {
     return `
-      <li class='new-bookmark-expanded' data-item-id="${store.store.bookmarks.id}">
-      <span id="title">${store.store.bookmarks.title}</span>
-      <span id="rating">${store.store.bookmarks.rating}</span>
+      <li class='new-bookmark'>
+        <span id="title">${store.store.bookmarks.title}</span>
+        <span id="rating">${store.store.bookmarks.rating}</span>
       </li>
-      <span class="description">${store.store.bookmarks.description}</span>
-      <a href="${store.store.bookmarks.url}" class="url-link" title="Go to this book here" target="_blank">Visit Site</a>
-      <button class="btn"><i class="fa fa-trash" id="trash"></i></button>
-    `;
-  } else {
-    return `
-    <li class='new-bookmark'>
-    <span id="title">${store.store.bookmarks.title}</span>
-    <span id="rating">${store.store.bookmarks.rating}</span>
-  </li>
+      <ul class="child">
+        <li class='new-bookmark-expanded' data-item-id="${store.store.bookmarks.id}">
+        <span id="title">${store.store.bookmarks.title}</span>
+        <span id="rating">${store.store.bookmarks.rating}</span>
+        </li>
+        <span class="description">${store.store.bookmarks.description}</span>
+        <a href="${store.store.bookmarks.url}" class="url-link" title="Go to this book here" target="_blank">Visit Site</a>
+        <button class="btn"><i class="fa fa-trash" id="trash"></i></button>
+      </ul>
+ 
       `;
   }
 };
 
+
+$('.child').hide();
+$('.new-bookmark').click(function() {
+  $(this).siblings('.new-bookmark').find('ul').slideUp();
+  $(this).find('ul').slideToggle();
+});
     
 
 const getBookmarkString = function (bookmarkList) {
@@ -43,7 +51,7 @@ const getBookmarkString = function (bookmarkList) {
 const render = function () {
   let bookmarks = [...store.store.bookmarks];
   const bookmarkListString = getBookmarkString(bookmarks);
-  $('#bookmark-list').html(bookmarkListString);
+  $('#bookmark-list').append(bookmarkListString);
 };
 
 
@@ -60,6 +68,7 @@ const handleSubmitButtonOnAddForm = function () {
 
     let formElement = $('#add-new-bookmark')[0];
     console.log( serializeJson(formElement) );
+
     let newBookmarkAdd = serializeJson(formElement);
 
     api.createBookmark(newBookmarkAdd)
@@ -72,6 +81,8 @@ const handleSubmitButtonOnAddForm = function () {
       });
   });
 };
+
+
 
 //handleEditBookmarkSubmit will listen for when a user wants to
 //edit a bookmark item
@@ -96,7 +107,7 @@ const getItemIdFromElement = function (item) {
 };
 
 const handleDeleteBookmarkClicked = function() {
-  $('.new-bookmark-expanded').on('click', '#trash', event => {
+  $('.child').on('click', '#trash', event => {
     const id = getItemIdFromElement(event.currentTarget);
 
     api.deleteBookmark(id)
