@@ -13,7 +13,6 @@ import api from './api';
 
 
 const getBookmarkElement = function () {
-  if(store.store.expanded === true) {
     return `
       <li class='new-bookmark'>
         <span id="title">${store.store.bookmarks.title}</span>

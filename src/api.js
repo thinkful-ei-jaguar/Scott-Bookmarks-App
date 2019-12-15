@@ -11,17 +11,18 @@ function getBookmarks() {
   return fetch(BASE_URL);
 }
 
-const createBookmark = function(title, url, description, rating) {
-  const newBookmark = JSON.stringify({title, url, description, rating });
-  
-  return fetch(BASE_URL, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: newBookmark
-  });
-};
+const createBookmark = function(body) {
+    // const newBookmark = JSON.stringify({title, url, description, rating });
+    
+    return fetch(BASE_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: body
+    });
+  };
+
 
 
 const updateBookmark = function (id, updateData) {
