@@ -21,33 +21,55 @@ const getAllBookmarks = function() {
 
 
 const handleBookmarkElementClickForExpansion = function() {
-  $('#bookmark-list').on('click', '.fullBookmark', function (event) {
+  $('#bookmark-list').on('click', '#fullView', function (event) {
     console.log(event.currentTarget);
 
     $(event.currentTarget)
+      
       .toggleClass('show-details')
       .children('.expandedContent')
-      .removeClass('expandedContent');
+      .removeClass('.expandedContent');
+
   });
 };
 
+
+
 const getBookmarkElement = function (bookmark) {
-  return `
-       <li class='fullBookmark' data-item-id="${bookmark.id}">
+  if(bookmark.expanded ) {
+    return `
+       <li class='fullBookmark' id="fullView" data-item-id="${bookmark.id}">
           <span id="title">${bookmark.title}</span>
           <span id="rating">${bookmark.rating}</span>
-          <div class='expandedContent'>
-            <span class="description">${bookmark.description}</span>
+          <div class='expandedContent' class="show-details">
+            <div>
+            <span class="description">Description: ${bookmark.description}</span>
             <a href="${bookmark.url}" class="url-link" title="Go to this book here" target="_blank">Visit Site</a>
             <button class="btn"><i class="fa fa-trash" id="trash"></i></button>
+           </div>
           </div>
        </li>
-`;
+      `; 
+  } else {
+    return `
+       <li class='fullBookmark' id="fullView" data-item-id="${bookmark.id}">
+          <span id="title">${bookmark.title}</span>
+          <span id="rating">${bookmark.rating} star out of 5</span>
+        `;
+  }
 };
 
 
 
 
+// const filterFunc = function() {
+//   $(function() {
+//     $("#filter-button").change(function() {
+//       let filt = $('#filter-button').val();
+//       if (filt != "all") $("table tr").show().not('#' + filt).hide();
+//       else $("table tr").show();
+//     });
+// }
 
 
 
@@ -120,6 +142,7 @@ const getItemIdFromElement = function (item) {
 const handleDeleteBookmarkClicked = function() {
   $('.child').on('click', '.btn', event => {
     const id = getItemIdFromElement(event.currentTarget);
+    console.log('deleted?');
 
     api.deleteBookmark(id)
       .then(res => res.json())

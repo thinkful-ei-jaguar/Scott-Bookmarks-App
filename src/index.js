@@ -15,6 +15,8 @@ import './index.css';
 import api from './api';
 import store from './store';
 import bookmark from './bookmark-list';
+
+
 function renderHomePage() {
   const html = `
         <button class="add-bookmark">
@@ -28,15 +30,15 @@ function renderHomePage() {
              <option value="2">2 Stars</option>
              <option value="1">1 Star</option>
            </select>
-       </body>
           `;
       
   $('.main').html(html); //accessing the main from index.html and inputing the html variable we just created
 }
 
-
+    
 function addFormTemplate() {
-  return `
+  if (store.store.booksmarks.adding) { 
+    return `
         <form id='add-new-bookmark'>
           <h2 class='form-title'>What would you like to bookmark?</h2>
           <section class='form-right' role="region">
@@ -67,6 +69,7 @@ function addFormTemplate() {
           </div>
         </form>
         `;
+  }
 }
     
 const handleAddFormClicked = function() {

@@ -45,15 +45,12 @@ ul li {
   height: 350px;
  }
 
-#additionalBookmarkContent {
+
+
+/* #additionalBookmarkContent {
   display: block;
+} */
 
-}
-
-.fullContent {
-  height: 300px;
-
-}
 
 #js-rating-input {
   margin: 10px;
