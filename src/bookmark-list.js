@@ -23,10 +23,11 @@ const getAllBookmarks = function() {
 const handleBookmarkElementClickForExpansion = function() {
   $('#bookmark-list').on('click', '.fullBookmark', function (event) {
     console.log(event.currentTarget);
-  
-    $(event.currentTarget).addClass('show-details');
-    $(event.currentTarget).removeClass('expandedContent');
 
+    $(event.currentTarget)
+      .toggleClass('show-details')
+      .children('.expandedContent')
+      .removeClass('expandedContent');
   });
 };
 
@@ -35,7 +36,7 @@ const getBookmarkElement = function (bookmark) {
        <li class='fullBookmark' data-item-id="${bookmark.id}">
           <span id="title">${bookmark.title}</span>
           <span id="rating">${bookmark.rating}</span>
-          <div id="additionalBookmarkContent" class='expandedContent'>
+          <div class='expandedContent'>
             <span class="description">${bookmark.description}</span>
             <a href="${bookmark.url}" class="url-link" title="Go to this book here" target="_blank">Visit Site</a>
             <button class="btn"><i class="fa fa-trash" id="trash"></i></button>

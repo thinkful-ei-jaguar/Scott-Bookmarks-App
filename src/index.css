@@ -52,7 +52,6 @@ ul li {
 
 .fullContent {
   height: 300px;
-  background-color: hotpink;
 
 }
 
@@ -79,8 +78,10 @@ body {
 
 .description {
   display: flex;
+  justify-content: center;
   align-self: center;
   text-align: center;
+
 }
 
 .url-link {
