@@ -3,6 +3,7 @@
 }
 
 h1 {
+  font-family: 'Montserrat', Italic;
   display: flex;
   justify-content: center;
 }
@@ -18,7 +19,6 @@ ul {
 
  li {
   width: 50%;
-  height: 80px;
   margin: 0 auto;
   margin-top: 20px;
   margin-bottom: 20px;
@@ -40,17 +40,16 @@ ul {
   margin-top: 30px;
 }
 
-.expandedContent {
+ul li .expandedContent {
+  display: none;
+}
+
+ul li .show-content {
   display: block;
 }
 
-.show-details {
-  display: block;
-  height: 350px;
- }
-
-.glow {
-  background-color: goldenrod;
+ul li .glow {
+  color: goldenrod;
 }
 
 
@@ -59,25 +58,26 @@ ul {
 } */
 
 
-/* #js-rating-input {
+#js-rating-input {
   margin: 10px;
-} */
+}
 
 body {
   text-align: center;
 }
 
-#title {
-
+ul li #title {
+  text-align: center;
+  font-family: 'Montserrat', sans-serif;
   font-size: 25px;
   padding: 15px;
-  padding-bottom: 70px;
+  padding-bottom: 10px;
   display: inline-block;
   margin-right: 50px;
 }
 
 
-.description {
+ul li .description {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -86,7 +86,7 @@ body {
 
 }
 
-.url-link {
+ul li .url-link {
   display: flex;
   align-self: flex-end;
   width: 100%;
@@ -94,18 +94,19 @@ body {
   padding: 25px;
 }
 
-.btn {
+ul li .btn-delete {
   background-color: grey; /* Blue background */
   border: none; /* Remove borders */
   color: white; /* White text */
   padding: 12px 16px; /* Some padding */
-  font-size: 16px; /* Set a font size */
+  font-size: 26px;
   cursor: pointer; /* Mouse pointer on hover */
   border-radius: 5px;
+  margin-bottom: 20px;
 }
 
 /* Darker background on mouse-over */
-.btn:hover {
+ul li .show-content .btn:hover {
   background-color: RoyalBlue;
 }
 

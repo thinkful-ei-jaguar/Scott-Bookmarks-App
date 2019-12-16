@@ -87,7 +87,7 @@ const getBookmarkStarElement =  function(bookmark) {
 
   for (let i = 0; i < 5; i++) {
     if(bookmark.rating > 0){
-      stars = '<i class="fa fa-star" class="glow" aria-hidden="true"></i>';
+      stars = '<i class="fa fa-star glow" aria-hidden="true"></i>';
       bookmark.rating -= 1;
     } else {
       stars ='<i class="fa fa-star" aria-hidden="true"></i>';
@@ -101,27 +101,26 @@ const getBookmarkStarElement =  function(bookmark) {
 
 
 const getBookmarkElement = function (bookmark) {
-  let bookmarkElement = `
-  <li class='fullBookmark' id="fullView" data-item-id="${bookmark.id}">
+  let bookmarkElement;
+  if(bookmark.expanded) {
+    bookmarkElement = `
+       <li class='fullBookmark' data-item-id="${bookmark.id}">
+          <span id="title">${bookmark.title}</span>
+          <div id="rating"> `+getBookmarkStarElement(bookmark)+` </div>
+            <span class="description">Description: ${bookmark.description}</span>
+            <a href="${bookmark.url}" type='url' class="url-link" title="Go to this book here" target="_blank">Visit Site</a>
+            <button class="btn-delete"><i class="fa fa-trash" id="trash"></i></button>
+
+       </li>
+      `; 
+  } else {
+    bookmarkElement = `
+  <li class='fullBookmark' data-item-id="${bookmark.id}">
      <span id="title">${bookmark.title}</span>
      <div id="rating"> `+getBookmarkStarElement(bookmark)+` </div>
   </li>
    `;
-  
-  
-  if(bookmark.expanded) {
-    bookmarkElement = `
-       <li class='fullBookmark' id="fullView" data-item-id="${bookmark.id}">
-          <span id="title">${bookmark.title}</span>
-          <div id="rating"> `+getBookmarkStarElement(bookmark)+` </div>
-          <div class='expandedContent' class="show-details">
-            <span class="description">Description: ${bookmark.description}</span>
-            <a href="${bookmark.url}" type='url'class="url-link" title="Go to this book here" target="_blank">Visit Site</a>
-            <button class="btn"><i class="fa fa-trash" id="trash"></i></button>
-           </div>
-       </li>
-      `; 
-  } 
+  }
   return bookmarkElement;
 };
 
@@ -139,9 +138,16 @@ const render = function () {
   let bookmarks = [...store.store.bookmarks];
   
   //if adding, if filter, if expanded. what is being painted on the page 
+
   
-  const bookmarkListString = getBookmarkString(bookmarks);
-  $('.bookmark-list').html(bookmarkListString);
+  if(store.adding === true){
+    const formHTML = addFormTemplate();
+    $('main').html(formHTML);
+    // return addFormTemplate();
+  } else {
+    const bookmarkListString = getBookmarkString(bookmarks);
+    $('#bookmark-list').html(bookmarkListString);
+  }
 };
 
 
@@ -174,15 +180,17 @@ const handleSubmitButtonOnAddForm = function () {
 
 const getItemIdFromElement = function (item) {
   return $(item)
-    .closest('.fullBookmark')
+    .closest('li')
     .data('item-id');
 };
 
 
 const handleBookmarkElementClickForExpansion = function() {
-  $('main').on('click', '.fullBookmark', event => {
-    event.preventDefault();
+  $('#bookmark-list').on('click', '.fullBookmark', event => {
+    // event.preventDefault(); prevent default behavior on form or buttons
+    console.log("expanded click");
     let id = getItemIdFromElement(event.currentTarget);
+    console.log(id);
     store.findAndExpand(id);
     render();
   });
@@ -190,11 +198,24 @@ const handleBookmarkElementClickForExpansion = function() {
 
 
 const handleDeleteBookmarkClicked = function() {
-  $('#bookmark-list').on('click', '.btn', event => {
+  $('#bookmark-list').on('click', '.btn-delete', event => {
     const id = getItemIdFromElement(event.currentTarget);
-    console.log('deleted?');
+    console.log('deleted', id);
 
     api.deleteBookmark(id)
+      .then(() => {
+        store.findAndDelete(id);
+        render();
+      });
+  });
+};
+
+const handleFilterDropdown = function() {
+  $('#bookmark-list').on('click', '.btn-delete', event => {
+    const id = getItemIdFromElement(event.currentTarget);
+    console.log('deleted', id);
+
+    api.updateBookmark(id)
       .then(() => {
         store.findAndDelete(id);
         render();

@@ -3,24 +3,7 @@
 //if you wanted to have search or filter on your bookmarks list)
 
 const store = {
-  bookmarks: [
-    {
-      id: 'bi420',
-      title: 'Sample Bookmark 1',
-      rating: 2,
-      url: 'http://www.google.com',
-      description: 'this links to google',
-      expanded: false
-    },
-    {
-      id: 'bi420',
-      title: 'Sample Bookmark 2',
-      rating: 5,
-      url: 'http://www.google.com',
-      description: 'this also links to google',
-      expanded: false
-    }
-  ],
+  bookmarks: [],
   adding: true,
   error: null,
   filter: 0
@@ -30,7 +13,7 @@ const store = {
 //findById will find a book by the specific id 
 
 const findById = function(id) {
-  return this.bookmarks.find(currentBookmark => currentBookmark.id === id);
+  return this.store.bookmarks.find(currentBookmark => currentBookmark.id === id);
 };
 
 //addBookmark will add the bookmark to the store(bookmarks)
@@ -42,7 +25,7 @@ const addBookmark = function (bookmark) {
 //findAndDelete will delete a bookmark from the local store
 
 const findAndDelete = function(id) {
-  this.bookmarks = this.bookmarks.filter(currentBookmark => currentBookmark.id !== id);
+  this.store.bookmarks = this.store.bookmarks.filter(currentBookmark => currentBookmark.id !== id);
 };
 
 //findAndUpdate will change a bookmark currently in the local store
@@ -53,9 +36,9 @@ const findAndExpand = function(id) {
 };
 
 
-const filterBookmarkList = function() {
+// const filterBookmarkList = function() {
 
-};
+// };
 
 
 //setError updates the error in the local store showing 
