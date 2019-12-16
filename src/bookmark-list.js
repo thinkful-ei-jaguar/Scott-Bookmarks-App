@@ -21,10 +21,12 @@ const getAllBookmarks = function() {
 
 
 const handleBookmarkElementClickForExpansion = function() {
-  $('#bookmark-list').on('click', '.fullBookmark', function () {
-    console.log('hello');
-    $('#additioxnalBookmarkContent').removeClass('expandedContent');
-    $('.fullBookmark').addClass('show-details');
+  $('#bookmark-list').on('click', '.fullBookmark', function (event) {
+    console.log(event.currentTarget);
+  
+    $(event.currentTarget).addClass('show-details');
+    $(event.currentTarget).removeClass('expandedContent');
+
   });
 };
 

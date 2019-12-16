@@ -40,12 +40,14 @@ ul li {
   display: none;
 }
 
-.show-details .expanded-content {
-  display: block
+.show-details {
+  display: block;
+  height: 350px;
  }
 
 #additionalBookmarkContent {
-  background-color: hotpink;
+  display: block;
+
 }
 
 .fullContent {
