@@ -23,9 +23,6 @@ ul li {
   border-radius: 15px;
 }
 
-li .expanded {
-  height: 350px;
-}
 
 .add-bookmark-form {
   border: solid 2px grey;
@@ -41,6 +38,14 @@ li .expanded {
 
 .expandedContent {
   display: none;
+}
+
+.show-details .expanded-content {
+  display: block
+ }
+
+#additionalBookmarkContent {
+  background-color: hotpink;
 }
 
 .fullContent {

@@ -23,7 +23,8 @@ const getAllBookmarks = function() {
 const handleBookmarkElementClickForExpansion = function() {
   $('#bookmark-list').on('click', '.fullBookmark', function () {
     console.log('hello');
-    $('#additionalBookmarkContent').removeClass('.expandedContent');
+    $('#additioxnalBookmarkContent').removeClass('expandedContent');
+    $('.fullBookmark').addClass('show-details');
   });
 };
 
