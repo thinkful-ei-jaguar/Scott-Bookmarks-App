@@ -10,7 +10,7 @@ const store = {
       rating: 2,
       url: 'http://www.google.com',
       description: 'this links to google',
-      expanded: true
+      expanded: false
     },
     {
       id: 'bi420',
@@ -18,7 +18,7 @@ const store = {
       rating: 5,
       url: 'http://www.google.com',
       description: 'this also links to google',
-      expanded: true
+      expanded: false
     }
   ],
   adding: true,
@@ -47,9 +47,9 @@ const findAndDelete = function(id) {
 
 //findAndUpdate will change a bookmark currently in the local store
 
-const findAndUpdate = function (id, newData) {
-  const currentBookmark = this.findById(id);
-  Object.assign(currentBookmark, newData);
+const findAndExpand = function(id) {
+  let currentBookmark = this.findById(id);
+  currentBookmark.expanded = !currentBookmark.expanded;
 };
 
 
@@ -71,7 +71,7 @@ export default {
   findById,
   addBookmark,
   findAndDelete,
-  findAndUpdate,
+  findAndExpand,
   filterBookmarkList,
   setError
 };

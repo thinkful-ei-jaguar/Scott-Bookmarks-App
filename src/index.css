@@ -8,20 +8,24 @@ h1 {
 }
 
 ul {
+  display: flex;
+  flex-direction: column;
   list-style-type: none;
   width: 80%;
   margin: 0 auto;
-  /* to center element */
   padding: 15px;
 }
 
-ul li {
+ li {
   width: 50%;
   height: 80px;
   margin: 0 auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
   border: 1px solid black;
   border-radius: 15px;
 }
+
 
 
 .add-bookmark-form {
@@ -37,7 +41,7 @@ ul li {
 }
 
 .expandedContent {
-  display: none;
+  display: block;
 }
 
 .show-details {
@@ -45,6 +49,9 @@ ul li {
   height: 350px;
  }
 
+.glow {
+  background-color: goldenrod;
+}
 
 
 /* #additionalBookmarkContent {
@@ -52,15 +59,16 @@ ul li {
 } */
 
 
-#js-rating-input {
+/* #js-rating-input {
   margin: 10px;
-}
+} */
 
 body {
   text-align: center;
 }
 
 #title {
+
   font-size: 25px;
   padding: 15px;
   padding-bottom: 70px;
@@ -68,14 +76,11 @@ body {
   margin-right: 50px;
 }
 
-#stars {
-  padding-top: 20px;
-  display: inline-block;
-}
 
 .description {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
   align-self: center;
   text-align: center;
 

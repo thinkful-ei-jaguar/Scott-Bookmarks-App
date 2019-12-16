@@ -12,79 +12,136 @@ import api from './api';
 
 
 
-//Should use the api.getAllBookmarks to retrieve the data from the server, 
-//empty the store.bookmarks, fill store.bookmarks with the data from the server.
-
-const getAllBookmarks = function() {
-
-};
-
-
-const handleBookmarkElementClickForExpansion = function() {
-  $('#bookmark-list').on('click', '#fullView', function (event) {
-    console.log(event.currentTarget);
-
-    $(event.currentTarget)
+function renderHomePage() {
+  const html = `
+        <button class="add-bookmark">
+        Add Bookmark
+       </button>
+           <select name="ratings" id="filter-button">
+             <option value="">Filter By Rating</option>
+             <option value="5">5 Stars</option>
+             <option value="4">4 Stars</option>
+             <option value="3">3 Stars</option>
+             <option value="2">2 Stars</option>
+             <option value="1">1 Star</option>
+           </select>
+          `;
       
-      .toggleClass('show-details')
-      .children('.expandedContent')
-      .removeClass('.expandedContent');
+  $('.main').html(html); //accessing the main from index.html and inputing the html variable we just created
+}
 
+    
+function addFormTemplate() {
+  return `
+        <form id='add-new-bookmark'>
+          <h2 class='form-title'>What would you like to bookmark?</h2>
+          <section class='form-right' role="region">
+            <div class='user-input'>
+              <label for="bookmark-title">Title: </label>
+              <input type="text" name="title" id="bookmark-title" required>
+            </div>
+            <div class='user-input'>
+              <label for="url">URL: </label>
+              <input type="url" name="url" id="url" placeholder="http://example.com" value="https://" required>
+            </div>
+            <div class='user-input'>
+              <label for="description">Description: </label>
+              <input type="text" name="description" id="description" required>
+            </div>
+          <div class='form-center'>
+            <select name="rating" id="rating-dropdown" required>
+              <option value="1">1 star</option>
+              <option value="2">2 stars</option>
+              <option value="3">3 stars</option>
+              <option value="4">5 stars</option>
+              <option value="5">5 stars</option>
+            </select>
+            <div id="form-buttons">
+              <button type="submit">Submit</button>
+              <button type="button" id="js-add-cancel">Cancel</button>
+            </div>
+          </div>
+        </form>
+        `;
+}
+
+    
+const handleAddFormClicked = function() {
+  $('.main').on('click', '.add-bookmark', function() {
+    store.adding= true;
+    
+    $('.main').prepend(addFormTemplate());
+  });
+};
+      
+const handleCancelButtonOnAddForm = function() {
+  $('.main').on('click', '#js-add-cancel', function() {
+    renderHomePage();
   });
 };
 
 
+const getBookmarkStarElement =  function(bookmark) {
+  let starNum = '';
+  let stars;
 
-const getBookmarkElement = function (bookmark) {
-  if(bookmark.expanded ) {
-    return `
-       <li class='fullBookmark' id="fullView" data-item-id="${bookmark.id}">
-          <span id="title">${bookmark.title}</span>
-          <span id="rating">${bookmark.rating}</span>
-          <div class='expandedContent' class="show-details">
-            <div>
-            <span class="description">Description: ${bookmark.description}</span>
-            <a href="${bookmark.url}" class="url-link" title="Go to this book here" target="_blank">Visit Site</a>
-            <button class="btn"><i class="fa fa-trash" id="trash"></i></button>
-           </div>
-          </div>
-       </li>
-      `; 
-  } else {
-    return `
-       <li class='fullBookmark' id="fullView" data-item-id="${bookmark.id}">
-          <span id="title">${bookmark.title}</span>
-          <span id="rating">${bookmark.rating} star out of 5</span>
-        `;
+  for (let i = 0; i < 5; i++) {
+    if(bookmark.rating > 0){
+      stars = '<i class="fa fa-star" class="glow" aria-hidden="true"></i>';
+      bookmark.rating -= 1;
+    } else {
+      stars ='<i class="fa fa-star" aria-hidden="true"></i>';
+    }
+    starNum += stars;
   }
+  return starNum;
 };
 
 
 
 
-// const filterFunc = function() {
-//   $(function() {
-//     $("#filter-button").change(function() {
-//       let filt = $('#filter-button').val();
-//       if (filt != "all") $("table tr").show().not('#' + filt).hide();
-//       else $("table tr").show();
-//     });
-// }
-
-
-
+const getBookmarkElement = function (bookmark) {
+  let bookmarkElement = `
+  <li class='fullBookmark' id="fullView" data-item-id="${bookmark.id}">
+     <span id="title">${bookmark.title}</span>
+     <div id="rating"> `+getBookmarkStarElement(bookmark)+` </div>
+  </li>
+   `;
+  
+  
+  if(bookmark.expanded) {
+    bookmarkElement = `
+       <li class='fullBookmark' id="fullView" data-item-id="${bookmark.id}">
+          <span id="title">${bookmark.title}</span>
+          <div id="rating"> `+getBookmarkStarElement(bookmark)+` </div>
+          <div class='expandedContent' class="show-details">
+            <span class="description">Description: ${bookmark.description}</span>
+            <a href="${bookmark.url}" type='url'class="url-link" title="Go to this book here" target="_blank">Visit Site</a>
+            <button class="btn"><i class="fa fa-trash" id="trash"></i></button>
+           </div>
+       </li>
+      `; 
+  } 
+  return bookmarkElement;
+};
 
 const getBookmarkString = function (bookmarkList) {
   const bookmarks = bookmarkList.map((element) => getBookmarkElement(element));
   return bookmarks.join('');
 };
 
+// const generateError = function() {};
+//const renderError = function () {};
+// const handleCloseError = function () {};
 
 
 const render = function () {
   let bookmarks = [...store.store.bookmarks];
+  
+  //if adding, if filter, if expanded. what is being painted on the page 
+  
   const bookmarkListString = getBookmarkString(bookmarks);
-  $('#bookmark-list').append(bookmarkListString);
+  $('.bookmark-list').html(bookmarkListString);
 };
 
 
@@ -94,6 +151,7 @@ let serializeJson = function(form) {
   formData.forEach((val, name) => o[name] = val);
   return JSON.stringify(o);
 };
+
 
 const handleSubmitButtonOnAddForm = function () {
   $('main').on('submit', '#add-new-bookmark', function (event) {
@@ -108,26 +166,7 @@ const handleSubmitButtonOnAddForm = function () {
       .then(res => res.json())
       .then((newBookmark) => {
         store.addBookmark(newBookmark);
-        // renderError();
-        store.store.adding = false;
-        render();
-      });
-  });
-};
-
-
-
-//handleEditBookmarkSubmit will listen for when a user wants to
-//edit a bookmark item
-
-const handleEditBookmarkSubmit = function () {
-  $('.main').on('submit', '.new-bookmark', event => {
-    event.preventDefault();
-    const id = getItemIdFromElement(event.currentTarget);
-    const itemName = $(event.currentTarget).find('.shopping-item').val();
-    api.updateItem(id, { name: itemName })
-      .then(() => {
-        store.findAndUpdate(id, { name: itemName });
+        store.adding = true;
         render();
       });
   });
@@ -135,17 +174,27 @@ const handleEditBookmarkSubmit = function () {
 
 const getItemIdFromElement = function (item) {
   return $(item)
-    .closest('.new-bookmark-expanded')
+    .closest('.fullBookmark')
     .data('item-id');
 };
 
+
+const handleBookmarkElementClickForExpansion = function() {
+  $('main').on('click', '.fullBookmark', event => {
+    event.preventDefault();
+    let id = getItemIdFromElement(event.currentTarget);
+    store.findAndExpand(id);
+    render();
+  });
+};
+
+
 const handleDeleteBookmarkClicked = function() {
-  $('.child').on('click', '.btn', event => {
+  $('#bookmark-list').on('click', '.btn', event => {
     const id = getItemIdFromElement(event.currentTarget);
     console.log('deleted?');
 
     api.deleteBookmark(id)
-      .then(res => res.json())
       .then(() => {
         store.findAndDelete(id);
         render();
@@ -158,13 +207,15 @@ const handleDeleteBookmarkClicked = function() {
 //making them accessible on the DOM
 
 const bindEventListeners = function () {
+  renderHomePage();
+  handleAddFormClicked();
   handleSubmitButtonOnAddForm();
-  handleEditBookmarkSubmit();
+  handleCancelButtonOnAddForm();
   handleDeleteBookmarkClicked();
   handleBookmarkElementClickForExpansion();
 };
 
-
+// This object contains the only exposed methods from this module:
 export default {
   render,
   bindEventListeners,
