@@ -37,15 +37,15 @@ function addFormTemplate() {
           <section role="region">
             <div class='user-input'>
               <label class='form-title' for="bookmark-title">Title: </label>
-              <input type="text" name="title" id="bookmark-title" required>
+              <input type="text" name="title" placeholder="Title Example" id="bookmark-title" required>
             </div>
             <div class='user-input'>
               <label class='form-url' for="url">URL: </label>
-              <input type="url" name="url" id="url" placeholder="https://example.com" pattern="https://.*" value="https://" required>
+              <input type="url" name="url" id="url" placeholder="https://example.com" pattern="https://.*"  required>
             </div>
             <div class='user-input'>
               <label class='form-description' for="description" >Description: </label>
-              <input type="text" name="desc" id="description" required>
+              <input type="text" name="desc" placeholder="This is an example of a description of https://example.com!" id="description" required>
             </div>
           <div class='form-center'>
             <select name="rating" id="rating-dropdown" required>

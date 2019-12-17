@@ -69,7 +69,7 @@ ul li .fullBookmark #rating {
   border-radius: 7px;
 }
 
-.controls #filter-button {
+.controls #foo {
   color: grey;
   font-family: 'Montserrat', Italic;
   font-size: 14px;
@@ -97,6 +97,13 @@ ul {
   margin-bottom: 20px;
   border: 1px solid black;
   border-radius: 15px;
+  padding-top: 20px;
+  background-color: rgba(221, 236, 237, 0.94);
+}
+
+li:hover {
+  background: rgba(0,0,0,0);
+	box-shadow: inset 0 0 0 1px #3a7999;
 }
 
 
@@ -126,10 +133,33 @@ ul li .glow {
 }
 
 
-/* #additionalBookmarkContent {
-  display: block;
-} */
+main form #bookmark-title{
+  width: 30%;
+  border-radius: 8px;
+  padding: 10px;
+  text-align: center;
+  margin-top: 10px;
+  font-size: 15px;
+}
 
+main form #url{
+  width: 30%;
+  border-radius: 8px;
+  padding: 10px;
+  text-align: center;
+  margin-top: 10px;
+  font-size: 15px;
+}
+
+main form #description{
+  width: 30%;
+  border-radius: 8px;
+  padding: 10px;
+  text-align: center;
+  margin-top: 10px;
+  font-size: 15px;
+  
+}
 
 #js-rating-input {
   margin: 10px;
@@ -144,8 +174,6 @@ ul li #title {
   font-family: 'Montserrat', sans-serif;
   padding: 15px;
   padding-bottom: 10px;
-  display: inline-block;
-  margin-right: 50px;
 }
 
 ul li  #rating {
@@ -153,8 +181,6 @@ ul li  #rating {
   font-family: 'Montserrat', sans-serif;
   padding: 15px;
   padding-bottom: 10px;
-  display: inline-block;
-  margin-right: 50px;
 }
 
 
