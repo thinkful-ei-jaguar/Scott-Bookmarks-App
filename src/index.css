@@ -165,6 +165,26 @@ main form #description{
   margin: 10px;
 }
 
+form .submit-form-btn{
+  font-family: 'Montserrat', Italic;
+  font-size: 15px;
+  display: flex;
+  margin: 0 auto;
+  margin-top: 25px;
+  border-radius: 7px;
+}
+
+form #cancel-add{
+  font-family: 'Montserrat', Italic;
+  font-size: 15px;
+  display: flex;
+  margin: 0 auto;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  border-radius: 7px;
+}
+
+
 body {
   text-align: center;
 }

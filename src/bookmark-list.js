@@ -56,7 +56,7 @@ function addFormTemplate() {
               <option value="5">5 stars</option>
             </select>
             <div id="form-buttons">
-              <button type="submit">Submit</button>
+              <button class="submit-form-btn" type="submit">Submit</button>
               <button type="button" id="cancel-add">Cancel</button>
             </div>
           </div>
