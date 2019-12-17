@@ -36,19 +36,19 @@ function addFormTemplate() {
           <h4 class='form-title'>What would you like to bookmark?</h4>
           <section role="region">
             <div class='user-input'>
-              <label class='form-title' for="bookmark-title">Title: </label>
-              <input type="text" name="title" placeholder="Title Example" id="bookmark-title" style="text-transform: uppercase;" required>
+              <label class='form-title' for="bookmark-title">TITLE: </label>
+              <input type="text" name="title" placeholder="Title Example" id="bookmark-title" required>
             </div>
             <div class='user-input'>
               <label class='form-url' for="url">URL: </label>
               <input type="url" name="url" id="url" placeholder="https://example.com" pattern="https://.*"  required>
             </div>
             <div class='user-input'>
-              <label class='form-description' for="description" >Description: </label>
+              <label class='form-description' for="description" >DESCRIPTION: </label>
               <input type="text" name="desc" placeholder="Example description for example.com!" id="description" required>
             </div>
           <div class='form-center'>
-            <label class="form-rating-select" for="rating-dropdown"> Please Rate Your Bookmark Here: </label>
+            <label class="form-rating-select" for="rating-dropdown"> BOOKMARK RATING: </label>
             <select name="rating" id="rating-dropdown" required>
               <option value="1">1 star</option>
               <option value="2">2 stars</option>
@@ -101,7 +101,7 @@ const getBookmarkElement = function (bookmark) {
 
   if(bookmark.expanded) {
     bookmarkElement = `
-       <li class='fullBookmark' data-item-id="${bookmark.id}">
+       <li class='fullBookmark' aria-controls="fullBookmark" aria-expanded="true" data-item-id="${bookmark.id}">
           <span class="title">${bookmark.title}</span>
           <div class="rating">
             ${starRatingHtml}
@@ -114,7 +114,7 @@ const getBookmarkElement = function (bookmark) {
       `; 
   } else {
     bookmarkElement = `
-  <li class='fullBookmark' data-item-id="${bookmark.id}">
+  <li class='fullBookmark' aria-controls="fullBookmark" aria-expanded="false" data-item-id="${bookmark.id}">
      <span class="title">${bookmark.title}</span>
      <div class="rating"> ${starRatingHtml} </div>
   </li>
@@ -127,10 +127,6 @@ const getBookmarkString = function (bookmarkList) {
   const bookmarks = bookmarkList.map((element) => getBookmarkElement(element));
   return bookmarks.join('');
 };
-
-// const generateError = function() {};
-//const renderError = function () {};
-// const handleCloseError = function () {};
 
 
 const handleFilterDropdown = function() {
@@ -149,6 +145,9 @@ const handleFilterDropdown = function() {
     render();
   });
 };
+
+
+
 
 const render = function () {
 
@@ -243,6 +242,7 @@ const bindEventListeners = function () {
   handleDeleteBookmarkClicked();
   handleBookmarkElementClickForExpansion();
   handleFilterDropdown();
+  handleCloseError();
 };
 
 // This object contains the only exposed methods from this module:

@@ -36,11 +36,6 @@ const findAndExpand = function(id) {
 };
 
 
-const filterBookmarkList = function() {
-
-};
-
-
 //setError updates the error in the local store showing 
 //what has been sent to the api error function
 
@@ -55,7 +50,6 @@ export default {
   addBookmark,
   findAndDelete,
   findAndExpand,
-  filterBookmarkList,
   setError
 };
 

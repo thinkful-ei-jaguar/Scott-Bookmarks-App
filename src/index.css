@@ -17,7 +17,7 @@ main form h4 {
 
 main form .form-title {
   font-family: 'Montserrat', sans-serif;
-  font-size: 15px;
+  font-size: 18px;
   color: white;
   display: flex;
   justify-content: center;
@@ -25,7 +25,7 @@ main form .form-title {
 
 main form .form-url {
   font-family: 'Montserrat', sans-serif;
-  font-size: 15px;
+  font-size: 18px;
   color: white;
   display: flex;
   justify-content: center;
@@ -33,8 +33,8 @@ main form .form-url {
 }
 
 main form .form-description {
-  font-family: 'Montserrat', Italic;
-  font-size: 15px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 18px;
   color: white;
   display: flex;
   justify-content: center;
@@ -42,8 +42,8 @@ main form .form-description {
 }
 
 main form .form-rating-select {
-  font-family: 'Montserrat', Italic;
-  font-size: 15px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 18px;
   color: white;
   display: flex;
   justify-content: center;
@@ -51,13 +51,13 @@ main form .form-rating-select {
 }
 
 main form section #rating-dropdown {
-  font-family: 'Montserrat', Italic;
-  font-size: 15px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 18px;
   display: flex;
   margin: 0 auto;
   margin-top: 15px;
   margin-bottom: 20px;
-  width: 8%
+  width: 8%;
 }
 
 .fa-star.checked {
@@ -114,6 +114,7 @@ ul {
   padding-top: 20px;
   background-color: rgba(255, 255, 255, 0.94);
   font-family: 'Montserrat', Italic;
+  padding: 20px;
 }
 
 
@@ -252,7 +253,6 @@ ul li .btn-delete {
 ul li .btn-delete:hover {
   background-color:rgb(147, 2, 0);
 }
-
 
 
 @media only screen and (max-width: 600px) {
