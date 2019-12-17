@@ -28,6 +28,6 @@
 
 
 
-#### Link to GH Pages Live: 
+##### Link to GH Pages Live: 
 
     - [x] https://thinkful-ei-jaguar.github.io/Scott-Bookmarks-App/
