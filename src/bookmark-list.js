@@ -14,9 +14,11 @@ import api from './api';
 
 function renderHomePage() {
   const html = `
+
         <button class="add-bookmark">
         Add Bookmark
        </button>
+          <label for="dropdownSelect" aria-label='dropdown'></label>
            <select name="ratings" id="dropdownSelect">
              <option value="">Filter By Rating</option>
              <option value="5">5 Stars</option>
