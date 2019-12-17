@@ -96,7 +96,7 @@ ul {
   margin-top: 20px;
   margin-bottom: 20px;
   border: 1px solid black;
-  border-radius: 15px;
+  border-radius: 25px;
   padding-top: 20px;
   background-color: rgba(221, 236, 237, 0.94);
 }
@@ -172,6 +172,7 @@ body {
 ul li #title {
   text-align: center;
   font-family: 'Montserrat', sans-serif;
+  flex-wrap: wrap;
   padding: 15px;
   padding-bottom: 10px;
 }
@@ -219,7 +220,27 @@ ul li .show-content .btn:hover {
 
 
 
+@media only screen and (max-width: 600px) {
+  li {
+    width: 80%
+  }
+  main form #bookmark-title{
+    width: 60%;
 
+  }
+  
+  main form #url{
+    width: 60%;
+
+  }
+  
+  main form #description{
+    width: 80%;
+  }
+
+
+
+}
 
 
 

@@ -20,10 +20,10 @@ function renderHomePage() {
            <select name="ratings" id="foo">
              <option value="">Filter By Rating</option>
              <option value="5">5 Stars</option>
-             <option value="4">4 Stars</option>
-             <option value="3">3 Stars</option>
-             <option value="2">2 Stars</option>
-             <option value="1">1 Star</option>
+             <option value="4">4 Stars+</option>
+             <option value="3">3 Stars+</option>
+             <option value="2">2 Stars+</option>
+             <option value="1">1 Star+</option>
            </select>
           `;
   $('.controls').html(html); //accessing the main from index.html and inputing the html variable we just created
@@ -45,7 +45,7 @@ function addFormTemplate() {
             </div>
             <div class='user-input'>
               <label class='form-description' for="description" >Description: </label>
-              <input type="text" name="desc" placeholder="This is an example of a description of https://example.com!" id="description" required>
+              <input type="text" name="desc" placeholder="Example description for example.com!" id="description" required>
             </div>
           <div class='form-center'>
             <select name="rating" id="rating-dropdown" required>
