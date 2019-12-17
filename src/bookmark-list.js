@@ -26,7 +26,8 @@ function renderHomePage() {
              <option value="1">1 Star+</option>
            </select>
           `;
-  $('.controls').html(html); //accessing the main from index.html and inputing the html variable we just created
+  // $('.controls').html(html); //accessing the main from index.html and inputing the html variable we just created
+  return html;
 }
 
     
@@ -67,8 +68,8 @@ function addFormTemplate() {
 
     
 const handleAddFormClicked = function() {
-  $('.controls').on('click', '.add-bookmark', function() {
-    store.store.adding = true;
+  $('main').on('click', '.add-bookmark', function() {
+    store.store.adding = !store.store.adding;
     render();
   });
 };
@@ -109,7 +110,6 @@ const getBookmarkElement = function (bookmark) {
             <span class="description">Description: ${bookmark.desc}</span>
             <a href="${bookmark.url}" type='url' class="url-link" title="Go to this book here" target="_blank">Visit Site</a>
             <button class="btn-delete"><i class="fa fa-trash" id="trash"></i></button>
-
        </li>
       `; 
   } else {
@@ -134,7 +134,7 @@ const handleFilterDropdown = function() {
 
 
 
-  $( '#dropdownSelect' ).change(function() {
+  $( 'main' ).on('change', '#dropdownSelect', function() {
     let dropDownNumber = $('#dropdownSelect').find(':selected').val();
     console.log(dropDownNumber);
     if (dropDownNumber === '') {
@@ -147,20 +147,51 @@ const handleFilterDropdown = function() {
 };
 
 
+//generateError will create the html to display the error message
 
+const generateError = function (message) {
+  return `
+  <section class = 'error-content'>
+      <p>Error!  The following error has occurred: ${message}</p>
+      <button id='cancel-error'>Got it.</button>
+    </section>
+  `;
+};
+
+//renderError checks the store to see if there is an error
+//if there is one, it passes it to generateError
+
+const renderError = function () {
+  if (store.store.error) {
+    const el = generateError(store.store.error);    
+    $('.error-container').html(el);  
+  } else {
+    $('.error-container').empty();
+  }
+};
+
+//handleCloseError just listens on the error message 
+//for when the user closes it
+
+const handleCloseError = function () {
+  $('.error-container').on('click', '#cancel-error', () => {
+    store.store.setError(null);
+    renderError();
+  });
+};
 
 const render = function () {
-
+  // renderError();
   let bookmarks = store.store.bookmarks.filter(bookmark => bookmark.rating >= store.store.filter);
   
   if(store.store.adding === true){
     const formHTML = addFormTemplate();
-    $('main').html(formHTML);
-    // return addFormTemplate();
+    $('main').html(`<nav class='controls'>${renderHomePage()}</nav>${formHTML}`);
+
   } else {
     $('main').html('');
     const bookmarkListString = getBookmarkString(bookmarks);
-    $('#bookmark-list').html(bookmarkListString);
+    $('main').html(`<nav class='controls'>${renderHomePage()}</nav><ul id='bookmark-list'>${bookmarkListString}</ul>`);
   }
 };
 
@@ -188,6 +219,11 @@ const handleSubmitButtonOnAddForm = function () {
         store.addBookmark(newBookmark);
         store.store.adding = false;
         render();
+      })
+      .catch((error) => {
+        store.store.setError(error.message);
+        alert(`${error.message}`);
+        renderError();
       });
   });
 };
@@ -200,7 +236,18 @@ const getItemIdFromElement = function (item) {
 
 
 const handleBookmarkElementClickForExpansion = function() {
-  $('#bookmark-list').on('click', '.fullBookmark', event => {
+  $('main').on('click', '.fullBookmark', event => {
+    // event.preventDefault(); prevent default behavior on form or buttons
+    console.log("expanded click");
+    let id = getItemIdFromElement(event.currentTarget);
+    console.log(id);
+    store.findAndExpand(id);
+    render();
+  });
+};
+
+const handleBookmarkElementKeyboardPressForExpansion = function() {
+  $('main').on('keypress', '.fullBookmark', event => {
     // event.preventDefault(); prevent default behavior on form or buttons
     console.log("expanded click");
     let id = getItemIdFromElement(event.currentTarget);
@@ -212,7 +259,7 @@ const handleBookmarkElementClickForExpansion = function() {
 
 
 const handleDeleteBookmarkClicked = function() {
-  $('#bookmark-list').on('click', '.btn-delete', event => {
+  $('main').on('click', '.btn-delete', event => {
     const id = getItemIdFromElement(event.currentTarget);
     console.log('deleted', id);
 
@@ -220,6 +267,11 @@ const handleDeleteBookmarkClicked = function() {
       .then(() => {
         store.findAndDelete(id);
         render();
+      })
+      .catch((error) => {
+        store.store.setError(error.message);
+        alert(`${error.message}`);
+        renderError();
       });
   });
 };
@@ -241,6 +293,7 @@ const bindEventListeners = function () {
   handleCancelButtonOnAddForm();
   handleDeleteBookmarkClicked();
   handleBookmarkElementClickForExpansion();
+  handleBookmarkElementKeyboardPressForExpansion();
   handleFilterDropdown();
   handleCloseError();
 };

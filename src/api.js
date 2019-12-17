@@ -3,7 +3,6 @@
 //talking to the server(aka fetch calls)
 
 
-
 const BASE_URL = 'https://thinkful-list-api.herokuapp.com/scott/bookmarks';
 
 

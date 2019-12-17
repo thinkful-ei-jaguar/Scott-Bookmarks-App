@@ -25,4 +25,5 @@
 
 
 #### Live GH Pages Link:
-    <https://thinkful-ei-jaguar.github.io/Scott-Bookmarks-App/>
+
+https://thinkful-ei-jaguar.github.io/Scott-Bookmarks-App/

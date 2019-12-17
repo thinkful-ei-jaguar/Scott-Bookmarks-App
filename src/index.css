@@ -254,6 +254,20 @@ ul li .btn-delete:hover {
   background-color:rgb(147, 2, 0);
 }
 
+.error-container {
+  color: red;
+  font-weight: bold;
+  font-size: 24px;
+}
+
+.error-container * {
+  display: inline-block;
+}
+
+#cancel-error {
+  margin-right: 0.5rem;
+}
+
 
 @media only screen and (max-width: 600px) {
   li {
