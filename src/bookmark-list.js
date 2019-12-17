@@ -181,7 +181,7 @@ const handleCloseError = function () {
 };
 
 const render = function () {
-  // renderError();
+  renderError();
   let bookmarks = store.store.bookmarks.filter(bookmark => bookmark.rating >= store.store.filter);
   
   if(store.store.adding === true){
@@ -246,16 +246,6 @@ const handleBookmarkElementClickForExpansion = function() {
   });
 };
 
-const handleBookmarkElementKeyboardPressForExpansion = function() {
-  $('main').on('keypress', '.fullBookmark', event => {
-    // event.preventDefault(); prevent default behavior on form or buttons
-    console.log("expanded click");
-    let id = getItemIdFromElement(event.currentTarget);
-    console.log(id);
-    store.findAndExpand(id);
-    render();
-  });
-};
 
 
 const handleDeleteBookmarkClicked = function() {
@@ -293,7 +283,6 @@ const bindEventListeners = function () {
   handleCancelButtonOnAddForm();
   handleDeleteBookmarkClicked();
   handleBookmarkElementClickForExpansion();
-  handleBookmarkElementKeyboardPressForExpansion();
   handleFilterDropdown();
   handleCloseError();
 };
