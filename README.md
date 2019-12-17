@@ -1,8 +1,8 @@
-# Bookmark Basement
+# Bookmark Basement #
 
 🚀 Scott Lingner's Solo Bookmark App for Thinkful's Software Engineering Immersion 🚀
 
-### As a user:
+### As a user: ###
 
 #### I can add bookmarks to my bookmark list. Bookmarks contain:
 
@@ -24,10 +24,10 @@
 #### I receive appropriate feedback when I cannot submit a bookmark
 
     - [x]Check all validations in the API documentation (e.g. title and url field required)
-#### I can select from a dropdown (a <select> element) a "minimum rating" to filter the list by all bookmarks rated at or above the chosen selection
+#### I can select from a dropdown (a <select> element) a "minimum rating" to filter the list by all bookmarks rated at or above the chosen selection ####
 
 
 
-##### Link to GH Pages Live: 
+##### Link to GH Pages Live: #####
 
     - [x] https://thinkful-ei-jaguar.github.io/Scott-Bookmarks-App/
