@@ -1,6 +1,6 @@
 # Bookmark Basement
 
-🚀 Scott Lingner's Solo Bookmark App 🚀
+🚀 Scott Lingner's Solo Bookmark App for Thinkful's Software Engineering Immersion 🚀
 
 ### As a user:
 
