@@ -249,7 +249,6 @@ const handleBookmarkElementClickForExpansion = function() {
 };
 
 
-
 const handleDeleteBookmarkClicked = function() {
   $('main').on('click', '.btn-delete', event => {
     const id = getItemIdFromElement(event.currentTarget);
@@ -285,6 +284,7 @@ const bindEventListeners = function () {
   handleCancelButtonOnAddForm();
   handleDeleteBookmarkClicked();
   handleBookmarkElementClickForExpansion();
+  handleBookmarkElementKeyboard();
   handleFilterDropdown();
   handleCloseError();
 };
