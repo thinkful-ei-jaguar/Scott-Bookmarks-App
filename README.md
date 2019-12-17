@@ -26,4 +26,4 @@
     -Check all validations in the API documentation (e.g. title and url field required)
 #### I can select from a dropdown (a <select> element) a "minimum rating" to filter the list by all bookmarks rated at or above the chosen selection
 
-[Live App](https://thinkful-ei-jaguar.github.io/Scott-Bookmarks-App/)
+[Live App]('https://thinkful-ei-jaguar.github.io/Scott-Bookmarks-App/')
