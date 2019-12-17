@@ -26,7 +26,6 @@ function renderHomePage() {
              <option value="1">1 Star</option>
            </select>
           `;
-      
   $('.controls').html(html); //accessing the main from index.html and inputing the html variable we just created
 }
 
@@ -81,32 +80,31 @@ const handleCancelButtonOnAddForm = function() {
 };
 
 
-// const getBookmarkStarElement =  function(bookmark) {
-//   let starNum = '';
-//   let stars;
-
-//   for (let i = 0; i < 5; i++) {
-//     if(bookmark.rating > 0){
-//       stars = '<i class="fa fa-star glow" aria-hidden="true"></i>';
-//       bookmark.rating -= 1;
-//     } else {
-//       stars ='<i class="fa fa-star" aria-hidden="true"></i>';
-//     }
-//     starNum += stars;
-//   }
-//   return starNum;
-// };
-
-
-
 
 const getBookmarkElement = function (bookmark) {
   let bookmarkElement;
+  let starRatingHtml = '';
+  let checkedCounter = 0;
+  let totalStarCounter = 0;
+
+  for(checkedCounter = 0; checkedCounter < bookmark.rating; checkedCounter++) {
+    starRatingHtml = starRatingHtml + '<span class="fa fa-star checked"></span>';
+    totalStarCounter++;
+  }
+
+  if (totalStarCounter < 5) {
+    for(totalStarCounter; totalStarCounter < 5; totalStarCounter++) {
+      starRatingHtml = starRatingHtml + '<span class="fa fa-star"></span>';
+    }
+  }
+
   if(bookmark.expanded) {
     bookmarkElement = `
        <li class='fullBookmark' data-item-id="${bookmark.id}">
           <span id="title">${bookmark.title}</span>
-          <div id="rating"> ${bookmark.rating} </div>
+          <div id="rating">
+            ${starRatingHtml}
+          </div>
             <span class="description">Description: ${bookmark.desc}</span>
             <a href="${bookmark.url}" type='url' class="url-link" title="Go to this book here" target="_blank">Visit Site</a>
             <button class="btn-delete"><i class="fa fa-trash" id="trash"></i></button>
@@ -117,7 +115,7 @@ const getBookmarkElement = function (bookmark) {
     bookmarkElement = `
   <li class='fullBookmark' data-item-id="${bookmark.id}">
      <span id="title">${bookmark.title}</span>
-     <div id="rating"> ${bookmark.rating} </div>
+     <div id="rating"> ${starRatingHtml} </div>
   </li>
    `;
   }
@@ -136,24 +134,24 @@ const getBookmarkString = function (bookmarkList) {
 
 const handleFilterDropdown = function() {
   console.log('conceptName');
+
+
+
   $( '#foo' ).change(function() {
-    let conceptName = $('#foo').find(':selected').text();
-    console.log(conceptName);
-    //if the filter number is equal to 
-    // if() {
-    //   render();
-    // }
+    let dropDownNumber = $('#foo').find(':selected').val();
+    console.log(dropDownNumber);
+    if (dropDownNumber === '') {
+      store.store.filter = 0;
+    } else {
+      store.store.filter = dropDownNumber;
+    }
+    render();
   });
 };
 
-
-
 const render = function () {
-  let bookmarks = [...store.store.bookmarks];
-  // let bookmarks = store.store.bookmarks.filter(bookmark => bookmark.rating >= store.store.bookmarks.rating);
-  
 
-  
+  let bookmarks = store.store.bookmarks.filter(bookmark => bookmark.rating >= store.store.filter);
   
   if(store.store.adding === true){
     const formHTML = addFormTemplate();
