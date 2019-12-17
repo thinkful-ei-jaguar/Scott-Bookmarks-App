@@ -17,7 +17,7 @@ function renderHomePage() {
         <button class="add-bookmark">
         Add Bookmark
        </button>
-           <select name="ratings" id="foo">
+           <select name="ratings" id="dropdownSelect">
              <option value="">Filter By Rating</option>
              <option value="5">5 Stars</option>
              <option value="4">4 Stars+</option>
@@ -37,7 +37,7 @@ function addFormTemplate() {
           <section role="region">
             <div class='user-input'>
               <label class='form-title' for="bookmark-title">Title: </label>
-              <input type="text" name="title" placeholder="Title Example" id="bookmark-title" required>
+              <input type="text" name="title" placeholder="Title Example" id="bookmark-title" onkeyup="this.value = this.value.toUpperCase();" required>
             </div>
             <div class='user-input'>
               <label class='form-url' for="url">URL: </label>
@@ -101,8 +101,8 @@ const getBookmarkElement = function (bookmark) {
   if(bookmark.expanded) {
     bookmarkElement = `
        <li class='fullBookmark' data-item-id="${bookmark.id}">
-          <span id="title">${bookmark.title}</span>
-          <div id="rating">
+          <span class="title">${bookmark.title}</span>
+          <div class="rating">
             ${starRatingHtml}
           </div>
             <span class="description">Description: ${bookmark.desc}</span>
@@ -114,8 +114,8 @@ const getBookmarkElement = function (bookmark) {
   } else {
     bookmarkElement = `
   <li class='fullBookmark' data-item-id="${bookmark.id}">
-     <span id="title">${bookmark.title}</span>
-     <div id="rating"> ${starRatingHtml} </div>
+     <span class="title">${bookmark.title}</span>
+     <div class="rating"> ${starRatingHtml} </div>
   </li>
    `;
   }
@@ -137,8 +137,8 @@ const handleFilterDropdown = function() {
 
 
 
-  $( '#foo' ).change(function() {
-    let dropDownNumber = $('#foo').find(':selected').val();
+  $( '#dropdownSelect' ).change(function() {
+    let dropDownNumber = $('#dropdownSelect').find(':selected').val();
     console.log(dropDownNumber);
     if (dropDownNumber === '') {
       store.store.filter = 0;
