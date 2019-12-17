@@ -46,7 +46,14 @@ main form section #rating-dropdown {
   margin-bottom: 20px;
 }
 
-main .add-bookmark {
+ul li .fullBookmark #rating {
+  font-family: 'Montserrat', Italic;
+  font-size: 15px;
+  display: flex;
+  margin: 0 auto;
+}
+
+.controls .add-bookmark {
   color: darkcyan;
   font-family: 'Montserrat', Italic;
   font-size: 15px;
@@ -57,7 +64,7 @@ main .add-bookmark {
   border-radius: 7px;
 }
 
-main #filter-button {
+.controls #filter-button {
   color: grey;
   font-family: 'Montserrat', Italic;
   font-size: 14px;
@@ -79,7 +86,7 @@ ul {
 }
 
  li {
-  width: 50%;
+  width: 29%;
   margin: 0 auto;
   margin-top: 20px;
   margin-bottom: 20px;
@@ -128,6 +135,15 @@ body {
 }
 
 ul li #title {
+  text-align: center;
+  font-family: 'Montserrat', sans-serif;
+  padding: 15px;
+  padding-bottom: 10px;
+  display: inline-block;
+  margin-right: 50px;
+}
+
+ul li  #rating {
   text-align: center;
   font-family: 'Montserrat', sans-serif;
   padding: 15px;

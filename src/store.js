@@ -28,7 +28,7 @@ const findAndDelete = function(id) {
   this.store.bookmarks = this.store.bookmarks.filter(currentBookmark => currentBookmark.id !== id);
 };
 
-//findAndUpdate will change a bookmark currently in the local store
+//findAndExpand will change a bookmark currently in the local store
 
 const findAndExpand = function(id) {
   let currentBookmark = this.findById(id);
