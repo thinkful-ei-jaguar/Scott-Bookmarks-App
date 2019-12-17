@@ -3,10 +3,71 @@
 }
 
 h1 {
-  font-family: 'Montserrat', Italic;
+  font-family: 'Montserrat', sans-serif;
   display: flex;
   justify-content: center;
 }
+
+main form h4 {
+  font-family: 'Montserrat', sans-serif;
+  display: flex;
+  justify-content: center;
+}
+
+main form .form-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 15px;
+  display: flex;
+  justify-content: center;
+}
+
+main form .form-url {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 15px;
+  display: flex;
+  justify-content: center;
+  margin-top: 25px;
+}
+
+main form .form-description {
+  font-family: 'Montserrat', Italic;
+  font-size: 15px;
+  display: flex;
+  justify-content: center;
+  margin-top: 25px;
+}
+
+main form section #rating-dropdown {
+  font-family: 'Montserrat', Italic;
+  font-size: 15px;
+  display: flex;
+  margin: 0 auto;
+  margin-top: 25px;
+  margin-bottom: 20px;
+}
+
+main .add-bookmark {
+  color: darkcyan;
+  font-family: 'Montserrat', Italic;
+  font-size: 15px;
+  display: flex;
+  margin: 0 auto;
+  margin-top: 25px;
+  margin-bottom: 20px;
+  border-radius: 7px;
+}
+
+main #filter-button {
+  color: grey;
+  font-family: 'Montserrat', Italic;
+  font-size: 14px;
+  display: flex;
+  margin: 0 auto;
+  margin-top: 25px;
+  margin-bottom: 20px;
+  border-radius: 7px;
+}
+
 
 ul {
   display: flex;
@@ -69,7 +130,6 @@ body {
 ul li #title {
   text-align: center;
   font-family: 'Montserrat', sans-serif;
-  font-size: 25px;
   padding: 15px;
   padding-bottom: 10px;
   display: inline-block;

@@ -12,7 +12,6 @@ function getBookmarks() {
 }
 
 const createBookmark = function(body) {
-  // const newBookmark = JSON.stringify({title, url, description, rating });
     
   return fetch(BASE_URL, {
     method: 'POST',

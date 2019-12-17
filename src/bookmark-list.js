@@ -27,33 +27,33 @@ function renderHomePage() {
            </select>
           `;
       
-  $('.main').html(html); //accessing the main from index.html and inputing the html variable we just created
+  $('.controls').html(html); //accessing the main from index.html and inputing the html variable we just created
 }
 
     
 function addFormTemplate() {
   return `
         <form id='add-new-bookmark'>
-          <h2 class='form-title'>What would you like to bookmark?</h2>
+          <h4 class='form-title'>What would you like to bookmark?</h4>
           <section class='form-right' role="region">
             <div class='user-input'>
-              <label for="bookmark-title">Title: </label>
+              <label class='form-title' for="bookmark-title">Title: </label>
               <input type="text" name="title" id="bookmark-title" required>
             </div>
             <div class='user-input'>
-              <label for="url">URL: </label>
-              <input type="url" name="url" id="url" placeholder="http://example.com" value="https://" required>
+              <label class='form-url' for="url">URL: </label>
+              <input type="url" name="url" id="url" placeholder="http://example.com" pattern="https://.*" value="https://" required>
             </div>
             <div class='user-input'>
-              <label for="description">Description: </label>
-              <input type="text" name="description" id="description" required>
+              <label class='form-description' for="description" >Description: </label>
+              <input type="text" name="desc" id="description" required>
             </div>
           <div class='form-center'>
             <select name="rating" id="rating-dropdown" required>
               <option value="1">1 star</option>
               <option value="2">2 stars</option>
               <option value="3">3 stars</option>
-              <option value="4">5 stars</option>
+              <option value="4">4 stars</option>
               <option value="5">5 stars</option>
             </select>
             <div id="form-buttons">
@@ -67,10 +67,9 @@ function addFormTemplate() {
 
     
 const handleAddFormClicked = function() {
-  $('.main').on('click', '.add-bookmark', function() {
-    store.adding= true;
-    
-    $('.main').prepend(addFormTemplate());
+  $('.controls').on('click', '.add-bookmark', function() {
+    store.store.adding = true;
+    render();
   });
 };
       
@@ -107,7 +106,7 @@ const getBookmarkElement = function (bookmark) {
        <li class='fullBookmark' data-item-id="${bookmark.id}">
           <span id="title">${bookmark.title}</span>
           <div id="rating"> `+getBookmarkStarElement(bookmark)+` </div>
-            <span class="description">Description: ${bookmark.description}</span>
+            <span class="description">Description: ${bookmark.desc}</span>
             <a href="${bookmark.url}" type='url' class="url-link" title="Go to this book here" target="_blank">Visit Site</a>
             <button class="btn-delete"><i class="fa fa-trash" id="trash"></i></button>
 
@@ -136,15 +135,21 @@ const getBookmarkString = function (bookmarkList) {
 
 const render = function () {
   let bookmarks = [...store.store.bookmarks];
-  
+  console.log(store);
   //if adding, if filter, if expanded. what is being painted on the page 
 
+  if(store.filter > 0) {
+    for(let i= 0; i < 5; i++) {
+      
+    }
+  }
   
-  if(store.adding === true){
+  if(store.store.adding === true){
     const formHTML = addFormTemplate();
     $('main').html(formHTML);
     // return addFormTemplate();
   } else {
+    $('main').html('');
     const bookmarkListString = getBookmarkString(bookmarks);
     $('#bookmark-list').html(bookmarkListString);
   }
@@ -172,7 +177,7 @@ const handleSubmitButtonOnAddForm = function () {
       .then(res => res.json())
       .then((newBookmark) => {
         store.addBookmark(newBookmark);
-        store.adding = true;
+        store.store.adding = false;
         render();
       });
   });
@@ -210,18 +215,18 @@ const handleDeleteBookmarkClicked = function() {
   });
 };
 
-const handleFilterDropdown = function() {
-  $('#bookmark-list').on('click', '.btn-delete', event => {
-    const id = getItemIdFromElement(event.currentTarget);
-    console.log('deleted', id);
+// const handleFilterDropdown = function() {
+//   $('#bookmark-list').on('click', '.btn-delete', event => {
+//     const id = getItemIdFromElement(event.currentTarget);
+//     console.log('deleted', id);
 
-    api.updateBookmark(id)
-      .then(() => {
-        store.findAndDelete(id);
-        render();
-      });
-  });
-};
+//     api.updateBookmark(id)
+//       .then(() => {
+//         store.findAndDelete(id);
+//         render();
+//       });
+//   });
+// };
 
 
 //This is an event listener binding function, 

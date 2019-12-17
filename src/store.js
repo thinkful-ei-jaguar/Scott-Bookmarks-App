@@ -4,7 +4,7 @@
 
 const store = {
   bookmarks: [],
-  adding: true,
+  adding: false,
   error: null,
   filter: 0
 };
@@ -36,9 +36,9 @@ const findAndExpand = function(id) {
 };
 
 
-// const filterBookmarkList = function() {
+const filterBookmarkList = function() {
 
-// };
+};
 
 
 //setError updates the error in the local store showing 
