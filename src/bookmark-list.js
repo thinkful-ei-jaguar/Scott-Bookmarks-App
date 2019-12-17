@@ -37,7 +37,7 @@ function addFormTemplate() {
           <section role="region">
             <div class='user-input'>
               <label class='form-title' for="bookmark-title">Title: </label>
-              <input type="text" name="title" placeholder="Title Example" id="bookmark-title" onkeyup="this.value = this.value.toUpperCase();" required>
+              <input type="text" name="title" placeholder="Title Example" id="bookmark-title" style="text-transform: uppercase;" required>
             </div>
             <div class='user-input'>
               <label class='form-url' for="url">URL: </label>
@@ -48,6 +48,7 @@ function addFormTemplate() {
               <input type="text" name="desc" placeholder="Example description for example.com!" id="description" required>
             </div>
           <div class='form-center'>
+            <label class="form-rating-select" for="rating-dropdown"> Please Rate Your Bookmark Here: </label>
             <select name="rating" id="rating-dropdown" required>
               <option value="1">1 star</option>
               <option value="2">2 stars</option>

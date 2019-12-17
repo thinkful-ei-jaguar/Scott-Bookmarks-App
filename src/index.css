@@ -18,6 +18,7 @@ main form h4 {
 main form .form-title {
   font-family: 'Montserrat', sans-serif;
   font-size: 15px;
+  color: white;
   display: flex;
   justify-content: center;
 }
@@ -25,6 +26,7 @@ main form .form-title {
 main form .form-url {
   font-family: 'Montserrat', sans-serif;
   font-size: 15px;
+  color: white;
   display: flex;
   justify-content: center;
   margin-top: 25px;
@@ -33,6 +35,16 @@ main form .form-url {
 main form .form-description {
   font-family: 'Montserrat', Italic;
   font-size: 15px;
+  color: white;
+  display: flex;
+  justify-content: center;
+  margin-top: 25px;
+}
+
+main form .form-rating-select {
+  font-family: 'Montserrat', Italic;
+  font-size: 15px;
+  color: white;
   display: flex;
   justify-content: center;
   margin-top: 25px;
@@ -43,8 +55,9 @@ main form section #rating-dropdown {
   font-size: 15px;
   display: flex;
   margin: 0 auto;
-  margin-top: 25px;
+  margin-top: 15px;
   margin-bottom: 20px;
+  width: 8%
 }
 
 .fa-star.checked {
