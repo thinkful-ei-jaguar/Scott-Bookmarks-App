@@ -14,7 +14,6 @@ import api from './api';
 
 function renderHomePage() {
   const html = `
-
         <button class="add-bookmark">
         Add Bookmark
        </button>
@@ -104,7 +103,7 @@ const getBookmarkElement = function (bookmark) {
 
   if(bookmark.expanded) {
     bookmarkElement = `
-       <li class='fullBookmark' aria-controls="fullBookmark" aria-expanded="true" data-item-id="${bookmark.id}">
+       <li class='fullBookmark' tabindex="0" aria-controls="fullBookmark" aria-expanded="true" data-item-id="${bookmark.id}">
           <span class="title">${bookmark.title}</span>
           <div class="rating">
             ${starRatingHtml}
@@ -116,7 +115,7 @@ const getBookmarkElement = function (bookmark) {
       `; 
   } else {
     bookmarkElement = `
-  <li class='fullBookmark' aria-controls="fullBookmark" aria-expanded="false" data-item-id="${bookmark.id}">
+  <li class='fullBookmark' tabindex="0" aria-controls="fullBookmark" aria-expanded="false" data-item-id="${bookmark.id}">
      <span class="title">${bookmark.title}</span>
      <div class="rating"> ${starRatingHtml} </div>
   </li>
@@ -170,7 +169,7 @@ const renderError = function () {
   } else {
     $('.error-container').empty();
   }
-};
+}; 
 
 //handleCloseError just listens on the error message 
 //for when the user closes it
@@ -183,7 +182,7 @@ const handleCloseError = function () {
 };
 
 const render = function () {
-  renderError();
+  renderError(); 
   let bookmarks = store.store.bookmarks.filter(bookmark => bookmark.rating >= store.store.filter);
   
   if(store.store.adding === true){
@@ -196,7 +195,6 @@ const render = function () {
     $('main').html(`<nav class='controls'>${renderHomePage()}</nav><ul id='bookmark-list'>${bookmarkListString}</ul>`);
   }
 };
-
 
 let serializeJson = function(form) {
   const formData = new FormData(form);
@@ -236,15 +234,27 @@ const getItemIdFromElement = function (item) {
     .data('item-id');
 };
 
+const expandBookmarkElement = function(event) {
+  console.log(event.currentTarget);
+  let id = getItemIdFromElement(event.currentTarget);
+  console.log(id);
+  store.findAndExpand(id);
+  render();
+};
 
 const handleBookmarkElementClickForExpansion = function() {
   $('main').on('click', '.fullBookmark', event => {
     // event.preventDefault(); prevent default behavior on form or buttons
-    console.log("expanded click");
-    let id = getItemIdFromElement(event.currentTarget);
-    console.log(id);
-    store.findAndExpand(id);
-    render();
+    expandBookmarkElement(event);
+  });
+};
+
+const handleBookmarkElementKeydownForExpansion =  function() {
+  $('main').on('keydown', '.fullBookmark', event => {
+    let code = event.keyCode;
+    if(code === 13) {
+      expandBookmarkElement(event);
+    }
   });
 };
 
@@ -284,7 +294,7 @@ const bindEventListeners = function () {
   handleCancelButtonOnAddForm();
   handleDeleteBookmarkClicked();
   handleBookmarkElementClickForExpansion();
-  handleBookmarkElementKeyboard();
+  handleBookmarkElementKeydownForExpansion();
   handleFilterDropdown();
   handleCloseError();
 };

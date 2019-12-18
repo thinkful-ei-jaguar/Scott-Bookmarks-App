@@ -39,7 +39,7 @@ const findAndExpand = function(id) {
 //setError updates the error in the local store showing 
 //what has been sent to the api error function
 
-const setError = function (error) {
+const setError = function(error) {
   this.error = error;
 };
 
